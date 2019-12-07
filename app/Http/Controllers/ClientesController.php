@@ -3,16 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreBlogPost;
 use App;
 
-class VentaController extends Controller
+class ClientesController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,7 +19,8 @@ class VentaController extends Controller
      */
     public function index()
     {
-        //
+        $cliente = App\Cliente::orderBy('nombre', 'ASC')->paginate(5);
+        return view('clientes.clientes',compact('cliente'));
     }
 
     /**
@@ -35,11 +30,7 @@ class VentaController extends Controller
      */
     public function create()
     {
-        $envasados = App\Envasado::all();
-        $clientes = App\Cliente::all();
-        $fpagos = App\Fpago::all();
-        $comi = App\Comicion::all();
-        return view('venta.agregar', compact('envasados', 'clientes', 'fpagos', 'comi'));
+        //
     }
 
     /**
@@ -48,19 +39,9 @@ class VentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBlogPost $request)
+    public function store(Request $request)
     {
-        $envasados = App\Envasado::all();
-        $clientes = App\Cliente::all();
-        $fpagos = App\Fpago::all();
-        $comi = App\Comicion::all();
-        App\Venta::create($request->all());
-
-        $g = new App\VentaEmpleado();
-        $g->user_id = $request->get('user_id');
-        $g->save();
-
-        return view('venta.agregar', compact('envasados', 'clientes', 'fpagos', 'comi'))->with('mensaje', 'La venta se a realizado correctamente');
+        //
     }
 
     /**
@@ -71,8 +52,7 @@ class VentaController extends Controller
      */
     public function show($id)
     {
-        $venta = App\Venta::findOrFail($id);
-        return view('venta.show', compact('venta'));
+        //
     }
 
     /**

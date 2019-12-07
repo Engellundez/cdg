@@ -15,11 +15,7 @@ class CreateVentaEmpleadosTable extends Migration
     {
         Schema::create('venta_empleados', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('producto_id');
-            $table->integer('precios_id');
-            $table->integer('pago_id');
             $table->integer('user_id');
-            $table->integer('comision_id');
             $table->timestamps();
         });
     }

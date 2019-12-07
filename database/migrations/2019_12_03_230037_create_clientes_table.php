@@ -20,6 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('telefono');
             $table->string('correo');
             $table->string('negocio');
+            $table->integer('comision_id');
             $table->timestamps();
         });
     }

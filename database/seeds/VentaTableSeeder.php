@@ -15,7 +15,7 @@ class VentaTableSeeder extends Seeder
             'fecha' => '2019-12-04',
             'producto_id' => '1',
             'cantidad' => '2',
-            'autoriza' => 'YO',
+            'autoriza' => '1',
             'user_id' => '1',
             'cliente_id' => '1',
             'factura' => '0',
@@ -32,6 +32,11 @@ class VentaTableSeeder extends Seeder
             'telefono' => '4433867825',
             'correo' => 'correo@gmail.com',
             'negocio' => 'Tienda Generica 1',
+            'comision_id' => '4'
+        ]);
+
+        DB::table('venta_empleados')->insert([
+            'user_id' => '1',
         ]);
     }
 }

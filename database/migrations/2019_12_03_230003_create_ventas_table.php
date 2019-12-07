@@ -18,7 +18,7 @@ class CreateVentasTable extends Migration
             $table->date('fecha');
             $table->integer('producto_id');
             $table->char('cantidad');
-            $table->char('autoriza');
+            $table->integer('autoriza');
             $table->integer('user_id');
             $table->integer('cliente_id');
             $table->boolean('factura');
