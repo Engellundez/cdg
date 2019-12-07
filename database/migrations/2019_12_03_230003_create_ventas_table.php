@@ -18,15 +18,14 @@ class CreateVentasTable extends Migration
             $table->date('fecha');
             $table->integer('producto_id');
             $table->char('cantidad');
-            $table->char('precio_u');
-            $table->char('total');
             $table->char('autoriza');
             $table->integer('user_id');
             $table->integer('cliente_id');
             $table->boolean('factura');
             $table->integer('comision_id');
-            $table->char('politica_precio');
+            $table->integer('fpago_id');
             $table->char('CVyFP');
+            $table->char('descripcion');
             $table->char('devoluciones');
             $table->timestamps();
         });

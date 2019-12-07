@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PrecioTableSeeder::class,
             ProductoTableSeeder::class,
             RolTableSeeder::class,
+            VentaTableSeeder::class,
             ]
         );
     }

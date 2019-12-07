@@ -18,6 +18,7 @@ class CreateEnvasadosTable extends Migration
             $table->char('codigo_producto');
             $table->char('producto');
             $table->char('descripcion');
+            $table->integer('precio');
             $table->timestamps();
         });
     }
