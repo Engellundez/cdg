@@ -15,8 +15,8 @@ class VentaTableSeeder extends Seeder
             'fecha' => '2019-12-04',
             'producto_id' => '1',
             'cantidad' => '2',
-            'autoriza' => '1',
-            'user_id' => '1',
+            'autoriza' => '2',
+            'user_id' => '3',
             'cliente_id' => '1',
             'factura' => '0',
             'comision_id' => '1',
@@ -29,14 +29,24 @@ class VentaTableSeeder extends Seeder
         DB::table('clientes')->insert([
             'nombre' => 'Raul Estrada OFarril',
             'direccion' => 'Aramen 541',
-            'telefono' => '4433867825',
+            'telefono' => '4433867835',
             'correo' => 'correo@gmail.com',
             'negocio' => 'Tienda Generica 1',
-            'comision_id' => '4'
+            'comision_id' => '4',
+            'user_id' => '1',
+        ]);
+        DB::table('clientes')->insert([
+            'nombre' => 'Angel David Escutia Lundez',
+            'direccion' => 'Francisco villa #110',
+            'telefono' => '4433867825',
+            'correo' => 'blu_mr.conejo@gmail.com',
+            'negocio' => 'Vape For life',
+            'comision_id' => '1',
+            'user_id' => '3',
         ]);
 
         DB::table('venta_empleados')->insert([
-            'user_id' => '1',
+            'user_id' => '3',
         ]);
     }
 }

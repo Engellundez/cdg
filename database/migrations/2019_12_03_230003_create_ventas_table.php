@@ -25,8 +25,8 @@ class CreateVentasTable extends Migration
             $table->integer('comision_id');
             $table->integer('fpago_id');
             $table->char('CVyFP');
-            $table->char('descripcion');
-            $table->char('devoluciones');
+            $table->char('descripcion')->nullable();
+            $table->char('devoluciones')->nullable();
             $table->timestamps();
         });
     }

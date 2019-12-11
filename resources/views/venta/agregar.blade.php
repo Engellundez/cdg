@@ -36,14 +36,21 @@ Realizar venta
             </div>
             <div class="col">
                 <label>Cantidad<span style="color: red;">*</span></label>
-                <input type="number" name="cantidad" required class="form-control" placeholder="Cantidad">
+                <input type="number" name="cantidad" required min="1" class="form-control" placeholder="Cantidad">
             </div>
         </div>
         <br><br>
         <div class="row">
             <div class="col">
-                <label>Vendedor<span style="color: red;">*</span></label>
-                <input type="text" required disabled value="{{Auth::user()->name}}" class="form-control">
+                <label>Autoriza<span style="color: red;">*</span></label>
+                <select name="autoriza" class="form-control" required id="autoriza">
+                    <option value="">-- Quién Autoriza la venta --</option>
+                    @foreach($user as $u)
+                        @if($u->id != 3)
+                            <option value="{{$u->id}}">{{$u->name}}</option>
+                        @endif
+                    @endforeach
+                </select>
                 <input type="hidden" name="user_id" required value="{{Auth::user()->id}}" class="form-control">
             </div>
             <div class="col">
@@ -51,7 +58,7 @@ Realizar venta
                 <select name="cliente_id" required id="cliente" class="form-control">
                     <option value=""> -- ESCOJE UN CLIENTE --</option>
                     @foreach($clientes as $c)
-                        <option value="{{$c->id}}">{{$c->nombre}} - {{$c->negocio}}, {{$c->direccion}}</option>
+                        <option value="{{$c->id}}">{{$c->nombre}}, {{$c->Comicions->Tipo_cliente}}</option>
                     @endforeach
                 </select>
             </div>
@@ -81,8 +88,8 @@ Realizar venta
                 <input type="text" name="CVyFP" required class="form-control" placeholder="CV y FP">
             </div>
             <div class="col">
-                <label>OBSERVACIONES<span style="color: red;">*</span></label>
-                <input type="text" name="descripcion" required class="form-control" placeholder="Descripcion">
+                <label>OBSERVACIONES</label>
+                <input type="text" name="descripcion" class="form-control" placeholder="Descripcion">
             </div>
         </div>
         <br><br>
@@ -91,7 +98,7 @@ Realizar venta
             </div>
             <div class="col">
                 <input type="hidden" value="{{Auth::user()->id}}" name="autoriza">
-                <input type="hidden" name="devoluciones" value="NULL">
+                <input type="hidden" name="devoluciones">
                 <label>Requiere Factura<span style="color: red;">*</span></label>
                 <select class="form-control" name="factura" required id="factura">
                     <option value="">-- ESCOJER UNA OPCION --</option>

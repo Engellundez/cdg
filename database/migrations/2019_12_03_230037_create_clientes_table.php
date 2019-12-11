@@ -18,9 +18,10 @@ class CreateClientesTable extends Migration
             $table->char('nombre');
             $table->char('direccion');
             $table->string('telefono');
-            $table->string('correo');
+            $table->string('correo')->unique();
             $table->string('negocio');
             $table->integer('comision_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

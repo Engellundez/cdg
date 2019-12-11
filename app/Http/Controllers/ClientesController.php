@@ -30,7 +30,8 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        //
+        $comi = App\Comicion::all();
+        return view('clientes.crear', compact('comi'));
     }
 
     /**
@@ -41,7 +42,9 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        App\Cliente::create($request->all());
+
+        return back()->with('mensaje', 'El cliente se ha registrado');
     }
 
     /**
@@ -52,7 +55,9 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = App\Venta::orderBy('id', 'DESC')->where('cliente_id', $id)->paginate(4);
+
+        return view('clientes.historial', compact('cliente'));
     }
 
     /**
@@ -63,7 +68,9 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $clie = App\Cliente::findOrFail($id);
+        $comi = App\Comicion::all();
+        return view('clientes.edit', compact('comi', 'clie'));
     }
 
     /**
@@ -75,7 +82,16 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cliente = App\Cliente::findOrFail($id);
+        $cliente->nombre = $request->nombre;
+        $cliente->negocio = $request->negocio;
+        $cliente->comision_id = $request->comision_id;
+        $cliente->telefono = $request->telefono;
+        $cliente->direccion = $request->direccion;
+        $cliente->correo = $request->correo;
+        $cliente->save();
+
+        return back()->with('mensaje', 'Se han actualizado los datos correctamente');
     }
 
     /**
@@ -86,6 +102,9 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cliente = App\Cliente::findOrFail($id);
+        $cliente->delete();
+
+        return back()->with('mensaje', 'El Cliente ha sido ELIMINADO Correctamente');
     }
 }

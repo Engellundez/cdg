@@ -12,6 +12,12 @@ class RolTableSeeder extends Seeder
      */
     public function run()
     {
+
+
+        //factory(App\User::class, 20)->create();
+
+
+
         DB::table('rols')->insert([
             'rol' => 'Administrador',
         ]);
@@ -23,11 +29,25 @@ class RolTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Angel David Escutia Lundez',
-            'email' => 'blu_mr.conejo@hotmail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
             'email_verified_at' => NULL,
             'password' => '$2y$10$3PXZaNjwitNuXJ0GLg7akO2Gri6Bn138EzOiGKk1jLDuuTLg4b6iq',
             'rol_id' => '1',
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Supervisor',
+            'email' => 'supervisor@gmail.com',
+            'email_verified_at' => NULL,
+            'password' => '$2y$10$3PXZaNjwitNuXJ0GLg7akO2Gri6Bn138EzOiGKk1jLDuuTLg4b6iq',
+            'rol_id' => '2',
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Vendedor',
+            'email' => 'vendedor@gmail.com',
+            'email_verified_at' => NULL,
+            'password' => '$2y$10$3PXZaNjwitNuXJ0GLg7akO2Gri6Bn138EzOiGKk1jLDuuTLg4b6iq',
+            'rol_id' => '3',
         ]);
     }
 }

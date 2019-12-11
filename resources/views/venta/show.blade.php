@@ -5,6 +5,7 @@ Ver detalle de venta {{$venta->id}}
 @endsection
 
 @section('contenido')
+<div style="text-align:center;">
 <h1>Detalles de la venta con folio de venta <span style="color:red;"> {{$venta->id}} </span></h1>
 
     <table class="table table-striped table-dark">
@@ -21,7 +22,7 @@ Ver detalle de venta {{$venta->id}}
                 <td>
                     numero de folio
                 </td>
-                <td>
+                <td style="color: red;">
                     {{$venta->id}}
                 </td>
             </tr>
@@ -45,9 +46,19 @@ Ver detalle de venta {{$venta->id}}
                 <td>
                     TOTAL
                 </td>
-                <td style="color: green;">
-                    ${{$venta->Envasados->precio * $venta->cantidad}}
-                </td>
+                @if(($venta->Envasados->precio * $venta->cantidad) >= 1)
+                    <td style="color: #3ed626;">
+                        ${{$venta->Envasados->precio * $venta->cantidad}}
+                    </td>
+                @elseif(($venta->Envasados->precio * $venta->cantidad) <= -1)
+                    <td style="color: red;">
+                        ${{$venta->Envasados->precio * $venta->cantidad}}
+                    </td>
+                @elseif(($venta->Envasados->precio * $venta->cantidad) == 0)
+                    <td style="color: yellow;">
+                        ${{$venta->Envasados->precio * $venta->cantidad}}
+                    </td>
+                @endif
             </tr>
             <tr>
                 <td>
@@ -129,4 +140,5 @@ Ver detalle de venta {{$venta->id}}
             </tr>
         </tbody>
     </table>
+</div>
 @endsection

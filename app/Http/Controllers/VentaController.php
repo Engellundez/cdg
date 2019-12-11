@@ -36,10 +36,11 @@ class VentaController extends Controller
     public function create()
     {
         $envasados = App\Envasado::all();
-        $clientes = App\Cliente::all();
+        $clientes = App\Cliente::orderBy('nombre', 'ASC')->paginate(30000);
         $fpagos = App\Fpago::all();
         $comi = App\Comicion::all();
-        return view('venta.agregar', compact('envasados', 'clientes', 'fpagos', 'comi'));
+        $user = App\User::all();
+        return view('venta.agregar', compact('envasados', 'clientes', 'fpagos', 'comi', 'user'));
     }
 
     /**
@@ -50,17 +51,13 @@ class VentaController extends Controller
      */
     public function store(StoreBlogPost $request)
     {
-        $envasados = App\Envasado::all();
-        $clientes = App\Cliente::all();
-        $fpagos = App\Fpago::all();
-        $comi = App\Comicion::all();
         App\Venta::create($request->all());
 
         $g = new App\VentaEmpleado();
         $g->user_id = $request->get('user_id');
         $g->save();
 
-        return view('venta.agregar', compact('envasados', 'clientes', 'fpagos', 'comi'))->with('mensaje', 'La venta se a realizado correctamente');
+        return back()->with('mensaje', 'La venta se a realizado correctamente');
     }
 
     /**
