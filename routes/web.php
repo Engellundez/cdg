@@ -21,4 +21,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/venta', 'VentaController');
 
+Route::resource('/ventaa', 'VenCuenController');
+
 Route::resource('/clientes', 'ClientesController');
+
+Route::delete('/eliminar{id}', 'VenCuenController@eliminar')->name('eliminar');
+
+Route::get('/crearfac{id}', 'VenCuenController@crearfac')->name('crear.factura');
+
+Route::post('/guardardatos', 'VenCuenController@guardar')->name('guardar');

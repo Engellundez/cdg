@@ -28,35 +28,47 @@ Ver detalle de venta {{$venta->id}}
             </tr>
             <tr>
                 <td>
-                    Producto
+                    Productos
                 </td>
                 <td>
-                    {{$venta->Envasados->producto}} con codigo {{$venta->Envasados->codigo_producto}}
+                    <ul>
+                        @foreach($vc as $v)
+                            @if($v->venta_id == $venta->id)
+                                <li>{{$v->Envasados->producto}} con codigo <a style="color:#1ca2d4;">{{$v->Envasados->codigo_producto}}</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </td>
             </tr>
             <tr>
                 <td>
-                    Cantidad de compra
+                    Precio Unitario y Cantidad
                 </td>
                 <td>
-                    {{$venta->cantidad}}
+                    <ul>
+                        @foreach($vc as $v1)
+                            @if($v1->venta_id == $venta->id)
+                                <li><a style="color:#3ed626;">${{$v1->Envasados->precio}}</a>, {{$v1->cantidad}}</li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </td>
             </tr>
             <tr>
                 <td>
                     TOTAL
                 </td>
-                @if(($venta->Envasados->precio * $venta->cantidad) >= 1)
+                @if($venta->total >= 1)
                     <td style="color: #3ed626;">
-                        ${{$venta->Envasados->precio * $venta->cantidad}}
+                        ${{$venta->total}}
                     </td>
-                @elseif(($venta->Envasados->precio * $venta->cantidad) <= -1)
+                @elseif($venta->total <= -1)
                     <td style="color: red;">
-                        ${{$venta->Envasados->precio * $venta->cantidad}}
+                        ${{$venta->total}}
                     </td>
-                @elseif(($venta->Envasados->precio * $venta->cantidad) == 0)
+                @elseif($venta->total == 0)
                     <td style="color: yellow;">
-                        ${{$venta->Envasados->precio * $venta->cantidad}}
+                        ${{$venta->total}}
                     </td>
                 @endif
             </tr>

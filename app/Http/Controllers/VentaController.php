@@ -35,12 +35,14 @@ class VentaController extends Controller
      */
     public function create()
     {
+        $ventacuenta = App\VentaCuenta::all();
         $envasados = App\Envasado::all();
         $clientes = App\Cliente::orderBy('nombre', 'ASC')->paginate(30000);
         $fpagos = App\Fpago::all();
         $comi = App\Comicion::all();
         $user = App\User::all();
-        return view('venta.agregar', compact('envasados', 'clientes', 'fpagos', 'comi', 'user'));
+        $vencue = App\Venta::orderBy('id', 'desc')->take(1)->get();
+        return view('venta.agregar', compact('ventacuenta','envasados', 'clientes', 'fpagos', 'comi', 'user', 'vencue'));
     }
 
     /**
@@ -69,7 +71,8 @@ class VentaController extends Controller
     public function show($id)
     {
         $venta = App\Venta::findOrFail($id);
-        return view('venta.show', compact('venta'));
+        $vc = App\VentaCuenta::all();
+        return view('venta.show', compact('venta', 'vc'));
     }
 
     /**

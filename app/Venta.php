@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Venta extends Model
 {
     protected $fillable = [
-        'fecha', 'producto_id', 'cantidad', 'autoriza', 'user_id', 'cliente_id', 'factura', 'comision_id', 'fpago_id', 'CVyFP', 'descripcion', 'devoluciones',
+        'fecha', 'total', 'autoriza', 'user_id', 'cliente_id', 'factura', 'comision_id', 'fpago_id', 'CVyFP', 'descripcion', 'devoluciones',
     ];
 
     public function Envasados(){

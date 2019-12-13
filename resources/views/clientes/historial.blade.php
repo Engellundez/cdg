@@ -5,13 +5,13 @@ Nuevos Clientes
 @endsection
 
 @section('contenido')
-<div>
     <table class="table table-striped table-dark" style="text-align:center;">
         <thead>
             <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha de Venta</th>
                 <th scope="col">Producto</th>
+                <th scope="col">Subtotal</th>
                 <th scope="col">Total</th>
                 <th scope="col">Autorizo</th>
                 <th scope="col">Vendio</th>
@@ -23,29 +23,47 @@ Nuevos Clientes
             </tr>
         </thead>
         <tbody>
-        <input type="hidden" value="{{$totfin = 0}}">
             @foreach($cliente as $c)
                 <tr>
                     <th scope="row">{{$c->Clientes->nombre}}</th>
                     <td>{{$c->fecha}}</td>
-                    <td>{{$c->Envasados->producto}} - {{$c->Envasados->descripcion}}</td>
-                    <th>${{$c->Envasados->precio * $c->cantidad}}</th>
-                    <input type="hidden" value="{{$totfin = $totfin + $c->Envasados->precio * $c->cantidad}}">
+                    <td>
+                        <ul>
+                            @foreach($productos as $p)
+                                @if($p->venta_id == $c->id)
+                                    <li>{{$p->Envasados->producto}}</li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach($productos as $p)
+                                @if($p->venta_id == $c->id)
+                                    <li style="color: #3ed626;">${{$tot = $p->Envasados->precio * $p->cantidad}}</li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </td>
+                    <th style="color: #3ed626;">${{$c->total}}</th>
                     <td>{{$c->Auto->name}}</td>
                     <td>{{$c->Users->name}}</td>
                     <td>{{$c->Comicions->Tipo_cliente}}</td>
-                    <td>{{$c->Fpagos->Descripcion}}</td>
+                    <td>{{$c->Fpagos->descripcion}}</td>
                     <td>{{$c->CVyFP}}</td>
                     <td>{{$c->descripcion}}</td>
                     <td>{{$c->devoluciones}}</td>
                 </tr>
             @endforeach
+            <input type="hidden" value="{{$totalfinal = 0}}">
+            @foreach($total as $t)
+                <input type="hidden" value="{{$totalfinal = $totalfinal + $t->total}}">
+            @endforeach
             <tr>
-                <th scope="row">TOTAL En esta pagina:</th>
-                <th colspan="10">${{$totfin}}</th>
+                <th scope="row" colspan="6">TOTAL:</th>
+                <th colspan="6" style="color: #3ed626;">${{$totalfinal}}</th>
             </tr>
         </tbody>
     </table>
     {{$cliente->links()}}
-</div>
 @endsection

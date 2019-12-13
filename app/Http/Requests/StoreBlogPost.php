@@ -24,8 +24,6 @@ class StoreBlogPost extends FormRequest
     public function rules()
     {
         return [
-            'producto_id' => 'required',
-            'cantidad' => 'required',
             'cliente_id' => 'required',
             'factura' => 'required',
             'fpago_id' => 'required',

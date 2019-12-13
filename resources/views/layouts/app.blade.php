@@ -135,6 +135,6 @@
             </div>
         </main>
     </div>
-@extends('layouts.footer')
+    @extends('layouts.footer')
 </body>
 </html>

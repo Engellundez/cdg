@@ -13,8 +13,7 @@ class VentaTableSeeder extends Seeder
     {
         DB::table('ventas')->insert([
             'fecha' => '2019-12-04',
-            'producto_id' => '1',
-            'cantidad' => '2',
+            'total' => '2200',
             'autoriza' => '2',
             'user_id' => '3',
             'cliente_id' => '1',
@@ -47,6 +46,24 @@ class VentaTableSeeder extends Seeder
 
         DB::table('venta_empleados')->insert([
             'user_id' => '3',
+        ]);
+        DB::table('venta_cuentas')->insert([
+            'venta_id' => '1',
+            'producto_id' => '4',
+            'cantidad' => '2',
+        ]);
+        DB::table('venta_cuentas')->insert([
+            'venta_id' => '1',
+            'producto_id' => '2',
+            'cantidad' => '5',
+        ]);
+        DB::table('facturacions')->insert([
+            'cliente_id' => '0',
+            'razon_social' => '',
+            'rfc' => '',
+            'domicilio_fiscal' => '',
+            'correo' => '',
+            'telefono' => '',
         ]);
     }
 }

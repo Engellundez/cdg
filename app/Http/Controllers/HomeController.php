@@ -24,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $venta = App\venta::orderBy('id', 'DESC')->paginate(5);
-        return view('home',compact('venta'));
+        $venta = App\Venta::orderBy('id', 'DESC')->paginate(5);
+        $vencue = App\VentaCuenta::all();
+        return view('home',compact('venta', 'vencue'));
     }
 }

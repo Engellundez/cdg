@@ -20,7 +20,8 @@ class ClientesController extends Controller
     public function index()
     {
         $cliente = App\Cliente::orderBy('nombre', 'ASC')->paginate(5);
-        return view('clientes.clientes',compact('cliente'));
+        $factura = App\Facturacion::all();
+        return view('clientes.clientes',compact('cliente', 'factura'));
     }
 
     /**
@@ -44,7 +45,7 @@ class ClientesController extends Controller
     {
         App\Cliente::create($request->all());
 
-        return back()->with('mensaje', 'El cliente se ha registrado');
+        return redirect()->route('clientes.index');
     }
 
     /**
@@ -56,8 +57,10 @@ class ClientesController extends Controller
     public function show($id)
     {
         $cliente = App\Venta::orderBy('id', 'DESC')->where('cliente_id', $id)->paginate(4);
+        $total = App\Venta::all()->where('cliente_id', $id);
+        $productos = App\VentaCuenta::all();
 
-        return view('clientes.historial', compact('cliente'));
+        return view('clientes.historial', compact('cliente','total','productos'));
     }
 
     /**
@@ -104,6 +107,9 @@ class ClientesController extends Controller
     {
         $cliente = App\Cliente::findOrFail($id);
         $cliente->delete();
+
+        $factura = App\Facturacion::where('cliente_id', $id);
+        $factura->delete();
 
         return back()->with('mensaje', 'El Cliente ha sido ELIMINADO Correctamente');
     }

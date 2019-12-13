@@ -13,12 +13,11 @@ Hecho en Michoacán
     <thead>
         <tr>
             <th scope="col">Foloio de venta</th>
-            <th scope="col">Fecha</th>
             <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
-            <th scope="col">Precio U</th>
+            <th scope="col">Subtotal</th>
             <th scope="col">Total</th>
-            <th scope="col">Cliente / Contacto</th>
+            <th scope="col">Factura</th>
             <th scope="col">Opciones</th>
         </tr>
     </thead>
@@ -26,18 +25,47 @@ Hecho en Michoacán
         @foreach($venta as $item)
             <tr>
                 <th scope="row" style="color:red;">{{$item->id}}</th>
-                <td>{{$item->fecha}}</td>
-                <td>{{$item->Envasados->producto}}</td>
-                <td>{{$item->cantidad}}</td>
-                <td style="color: #3ed626;">${{$item->Envasados->precio}}</td>
-                @if(($item->cantidad * $item->Envasados->precio) == 0)
-                    <td style="color:yellow;">${{$total = $item->cantidad * $item->Envasados->precio}}</td>
-                @elseif(($item->cantidad * $item->Envasados->precio) <= -1)
-                    <td style="color:red;">${{$total = $item->cantidad * $item->Envasados->precio}}</td>
-                @elseif(($item->cantidad * $item->Envasados->precio) >= 1)
-                    <td style="color: #3ed626;">${{$total = $item->cantidad * $item->Envasados->precio}}</td>
-                @endif
-                <td>{{$item->Clientes->nombre}}</td>
+                <td>
+                    <ul>
+                        @foreach($vencue as $vc)
+                            @if($vc->venta_id == $item->id)
+                                <li>{{$vc->Envasados->producto}}: {{$vc->Envasados->descripcion}}</li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach($vencue as $vecu)
+                            @if($vecu->venta_id == $item->id)
+                                <li>{{$vecu->cantidad}}</li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach($vencue as $v)
+                            @if($v->venta_id == $item->id)
+                                <li>${{$totalfinfinal = $v->Envasados->precio * $v->cantidad}}</li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </td>
+                    @if($item->total == 0)
+                        <td style="color:yellow;">${{$item->total}}</td>
+                    @elseif($item->total <= -1)
+                        <td style="color:red;">${{$item->total}}</td>
+                    @elseif($item->total >= 1)
+                        <td style="color: #3ed626;">${{$item->total}}</td>
+                    @endif
+                <td>
+                    @if($item->factura == 0)
+                        {{_('NO')}}
+                    @else
+                        {{_('SI')}}
+                    @endif
+                </td>
                 <td>
                     <a href="{{route('venta.show', $item)}}">
                         <button type="submit" class="btn btn-info">
