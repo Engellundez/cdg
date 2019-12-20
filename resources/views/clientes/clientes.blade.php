@@ -44,16 +44,14 @@ Clientes
                 <td>{{$item->Users->name}}</td>
                 @if(Auth::user()->rol_id == 1)
                     <td>
-                        @foreach($factura as $f)
-                            @if($f->cliente_id == $item->id)
-                                <a href="{{route('ventaa.show', $item->id)}}"><button class="btn btn-success">Ver Factura</button></a>
-                                <input type="hidden" value="{{$comparativa = 1}}">
-                            @else
-                                <input type="hidden" value="{{$comparativa = 0}}">
-                            @endif
-                        @endforeach
-                        @if($comparativa == 0)
+                        @if($item->factura == 0)
                             <a href="{{route('crear.factura', $item->id)}}"><button class="btn btn-info">Registar Factura</button></a>
+                        @elseif($item->factura == 1)
+                            @foreach($factura as $f)
+                                @if($f->cliente_id == $item->id)
+                                    <a href="{{route('ventaa.show', $item->id)}}"><button class="btn btn-success">Ver Factura</button></a>
+                                @endif
+                            @endforeach
                         @endif
                     </td>
                     <td>

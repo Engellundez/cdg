@@ -33,6 +33,7 @@ class VentaTableSeeder extends Seeder
             'negocio' => 'Tienda Generica 1',
             'comision_id' => '4',
             'user_id' => '1',
+            'factura' => '0',
         ]);
         DB::table('clientes')->insert([
             'nombre' => 'Angel David Escutia Lundez',
@@ -42,6 +43,7 @@ class VentaTableSeeder extends Seeder
             'negocio' => 'Vape For life',
             'comision_id' => '1',
             'user_id' => '3',
+            'factura' => '0',
         ]);
 
         DB::table('venta_empleados')->insert([

@@ -34,6 +34,7 @@ Nuevos Clientes
                     <input type="text" required name="direccion" class="form-control" placeholder="Dirección (casa)">
                     <label><span style="color:red;">*</span>Correo</label>
                     <input type="email" required name="correo" class="form-control" placeholder="correo@gmail.com">
+                    <input type="hidden" required name="factura" value="0">
                     <input type="hidden" required name="user_id" value="{{Auth::user()->id}}">
                 </div>
             </div><br><br>

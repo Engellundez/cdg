@@ -20,6 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('telefono');
             $table->string('correo')->unique();
             $table->string('negocio');
+            $table->boolean('factura');
             $table->integer('comision_id');
             $table->integer('user_id');
             $table->timestamps();

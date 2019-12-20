@@ -35,6 +35,8 @@ Clientes
         <div class="col">
             <label>Telefono</label>
             <input type="number" min="10" style="text-transform:uppercase;" name="telefono" required class="form-control" placeholder="telefono">
+            <input type="hidden" name="factura" value="1" required>
+            <input type="hidden" name="id_user" value="{{$cliente->id}}">
         </div>
     </div><br><br>
     <div class="row">

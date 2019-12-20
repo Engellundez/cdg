@@ -118,7 +118,18 @@ class VenCuenController extends Controller
 
     public function guardar(Request $request)
     {
-        App\Facturacion::create($request->all());
+        $factura = new App\Facturacion();
+        $factura->cliente_id = $request->cliente_id;
+        $factura->razon_social = $request->razon_social;
+        $factura->rfc = $request->rfc;
+        $factura->domicilio_fiscal = $request->domicilio_fiscal;
+        $factura->correo = $request->correo;
+        $factura->telefono = $request->telefono;
+        $factura->save();
+
+        $clien = App\Cliente::findOrFail($request->id_user);
+        $clien->factura = $request->factura;
+        $clien->save();
 
         return redirect()->route('clientes.index');
     }

@@ -43,7 +43,16 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        App\Cliente::create($request->all());
+        $clientecito = new App\Cliente();
+        $clientecito->nombre = $request->nombre;
+        $clientecito->negocio = $request->negocio;
+        $clientecito->comision_id = $request->comision_id;
+        $clientecito->telefono = $request->telefono;
+        $clientecito->direccion = $request->direccion;
+        $clientecito->correo = $request->correo;
+        $clientecito->factura = $request->factura;
+        $clientecito->user_id = $request->user_id;
+        $clientecito->save();
 
         return redirect()->route('clientes.index');
     }
